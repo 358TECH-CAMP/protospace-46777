@@ -1,0 +1,25 @@
+<div class="prototype">
+  <!-- 画像 -->
+  <div class="prototype__image">
+    <% if prototype.image.attached? %>    
+      <%= link_to prototype_path(prototype) do %>
+        <%= image_tag prototype.image, alt: prototype.title %>
+       <% end %>
+    <% else %>
+      <p>画像はありません</p>
+    <% end %>
+  </div>
+
+  <!-- プロトタイプ名 -->
+  <p class="prototype__title">
+    <%= link_to prototype.title, prototype_path(prototype) %>
+  </p>
+
+  <!-- キャッチコピー -->
+  <p class="prototype__catch_copy"><%= prototype.catch_copy %></p>
+
+  <!-- 投稿者 -->
+  <p class="prototype__user">
+    by <%= link_to prototype.user.name, user_path(prototype.user), class: "prototype-user-link" %>
+  </p>
+</div>

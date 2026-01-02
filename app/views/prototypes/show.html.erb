@@ -1,0 +1,78 @@
+<main class="main">
+  <div class="inner">
+    <div class="prototype__wrapper">
+      
+      <!-- タイトル -->
+      <p class="prototype__hedding">
+        <%= @prototype.title %>
+      </p>
+
+      <!-- 投稿者 -->
+      <%= link_to "by #{@prototype.user.name}", user_path(@prototype.user), class: :prototype__user %>
+
+      <!-- 編集・削除ボタン（投稿者のみ表示） -->
+      <% if user_signed_in? && current_user == @prototype.user %>
+        <div class="prototype__manage">
+          <%= link_to "編集する", edit_prototype_path(@prototype), class: :prototype__btn %>
+          <%= link_to "削除する",
+           prototype_path(@prototype), 
+         data: { turbo_method: :delete, confirm: "本当に削除しますか?" }, 
+           class: :prototype__btn %>
+        </div>
+      <% end %>
+
+      <!-- 画像 -->
+      <div class="prototype__image">
+        <% if @prototype.image.attached? %>
+          <%= image_tag @prototype.image, alt: @prototype.title %>
+        <% else %>
+          <p>画像はありません</p>
+        <% end %>
+      </div>
+
+      <!-- キャッチコピー・コンセプト -->
+      <div class="prototype__body">
+        <div class="prototype__detail">
+          <p class="detail__title">キャッチコピー</p>
+          <p class="detail__message"><%= @prototype.catch_copy %></p>
+        </div>
+        <div class="prototype__detail">
+          <p class="detail__title">コンセプト</p>
+          <p class="detail__message"><%= @prototype.concept %></p>
+        </div>
+      </div>
+
+        <!-- コメント機能 -->
+      <div class="prototype__comments">
+
+        <!-- コメント投稿フォーム（ログイン時のみ表示） -->
+        <% if user_signed_in? %>
+          <%= form_with(model: [@prototype, @comment], local: true) do |f| %>
+            <div class="field">
+              <%= f.label :content, "コメント" %><br />
+              <%= f.text_area :content %>
+            </div>
+
+            <div class="actions">
+              <%= f.submit "送信する", class: :form__btn %>
+            </div>
+          <% end %>
+        <% else %>
+          <p>※ コメントを投稿するにはログインが必要です</p>
+        <% end %>
+
+        <!-- コメント一覧 -->
+        <ul class="comments_lists">
+          <% @comments.each do |comment| %>
+            <li class="comments_list">
+              <%= comment.content %>
+              <%= link_to "(#{comment.user.name})", user_path(comment.user), class: :comment_user %>
+            </li>
+          <% end %>
+        </ul>
+
+      </div>
+
+    </div>
+  </div>
+</main>

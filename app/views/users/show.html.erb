@@ -1,0 +1,42 @@
+<div class="main">
+  <div class="inner">
+    <div class="user__wrapper">
+      <!-- ユーザー情報の見出し -->
+      <h2 class="page-heading">
+        <%= @user.name %>さんの情報
+      </h2>
+
+      <!-- ユーザー情報の表 -->
+      <table class="table">
+        <tbody>
+          <tr>
+            <th class="table__col1">名前</th>
+            <td class="table__col2"><%= @user.name %></td>
+          </tr>
+          <tr>
+            <th class="table__col1">プロフィール</th>
+            <td class="table__col2"><%= @user.profile %></td>
+          </tr>
+          <tr>
+            <th class="table__col1">所属</th>
+            <td class="table__col2"><%= @user.position %></td>
+          </tr>
+          <tr>
+            <th class="table__col1">役職</th>
+            <td class="table__col2"><%= @user.position %></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- ユーザーのプロトタイプ見出し -->
+      <h2 class="page-heading">
+        <%= @user.name %>さんのプロトタイプ
+      </h2>
+
+      <!-- プロトタイプ一覧 -->
+      <div class="user__card">
+        <%= render partial: "prototypes/prototype", collection: @user.prototypes, as: :prototype %>
+      </div>
+    </div>
+  </div>
+</div>
