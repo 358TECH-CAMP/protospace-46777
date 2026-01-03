@@ -1,6 +1,6 @@
-<div class="prototype">
+<div class="card">
   <!-- 画像 -->
-  <div class="prototype__image">
+  <div class="card__img">
     <% if prototype.image.attached? %>    
       <%= link_to prototype_path(prototype) do %>
         <%= image_tag prototype.image, alt: prototype.title %>
@@ -11,15 +11,15 @@
   </div>
 
   <!-- プロトタイプ名 -->
-  <p class="prototype__title">
-    <%= link_to prototype.title, prototype_path(prototype) %>
+    <%= link_to prototype.title, prototype_path(prototype), class: "card__title" %>
   </p>
 
   <!-- キャッチコピー -->
-  <p class="prototype__catch_copy"><%= prototype.catch_copy %></p>
+  <p class="card__summary"><%= prototype.catch_copy %></p>
 
   <!-- 投稿者 -->
-  <p class="prototype__user">
-    by <%= link_to prototype.user.name, user_path(prototype.user), class: "prototype-user-link" %>
-  </p>
+  class="prototype__user">
+    by <%= link_to prototype.user.name, 
+    user_path(prototype.user), 
+    class: "card__user" %>
 </div>
